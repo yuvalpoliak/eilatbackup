@@ -23,7 +23,7 @@ let transporter = nodemailer.createTransport({
 
 app.use(cors());
 app.use(express.json());
-//app.use(express.static("dist"));
+app.use(express.static("public"));
 
 app.post("/", (req, res) => {
   const isAddress =
@@ -50,10 +50,9 @@ app.post("/", (req, res) => {
   });
   res.status(200).json({ success: "yaaaa" });
 });
-/*
+
 app.listen(port, () => {
   console.log(`nodemailerProject is listening at http://localhost:${port}`);
 });
-*/
 
 module.exports = app;
