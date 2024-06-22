@@ -23,6 +23,7 @@ let transporter = nodemailer.createTransport({
 
 app.use(cors());
 app.use(express.json());
+app.use(express.static("dist"));
 
 app.post("/", (req, res) => {
   const isAddress =
