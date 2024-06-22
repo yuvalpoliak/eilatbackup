@@ -1,20 +1,55 @@
-const sgMail = require('@sendgrid/mail')
-sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+const express = require("express");
+const app = express();
+const port = 3000;
+const nodemailer = require("nodemailer");
+const cors = require("cors");
+require("dotenv").config();
 
-const msg = {
-  to: 'test@example.com', // Change to your recipient
-  from: 'test@example.com', // Change to your verified sender
-  subject: 'Sending with SendGrid is Fun',
-  text: 'and easy to do anywhere, even with Node.js',
-  html: '<strong>and easy to do anywhere, even with Node.js</strong>',
-}
+let transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    type: "OAuth2",
+    user: process.env.MAIL_USERNAME,
+    pass: process.env.MAIL_PASSWORD,
+    clientId: process.env.OAUTH_CLIENTID,
+    clientSecret: process.env.OAUTH_CLIENT_SECRET,
+    refreshToken: process.env.OAUTH_REFRESH_TOKEN,
+  },
+});
 
-sgMail
-  .send(msg)
-  .then((response) => {
-    console.log(response[0].statusCode)
-    console.log(response[0].headers)
-  })
-  .catch((error) => {
-    console.error(error)
-  })
+/*
+
+*/
+
+app.use(cors());
+app.use(express.json());
+
+app.post("/", (req, res) => {
+  const isAddress =
+    req.body.address === "" ? "" : `\nכתובת: ${req.body.address}`;
+  let mailOptions = {
+    from: "yuval.poliak5@gmail.com",
+    to: "yuval.poliak5@gmail.com",
+    subject: "בור חדש התגלה",
+    text: `שם השולח: ${req.body.name}\n${isAddress}\nבזמן: ${req.body.time}\n פרטי מיקום:\nקו רוחב: ${req.body.position.latitude}\nקו אורך: ${req.body.position.longitude}`,
+    attachments: [
+      {
+        filename: req.body.img.filePath,
+        path: req.body.img.webviewPath,
+      },
+    ],
+  };
+  //console.log(req.body);
+  transporter.sendMail(mailOptions, function (err, data) {
+    if (err) {
+      console.log("Error " + err);
+    } else {
+      console.log("Email sent successfully");
+    }
+  });
+  res.status(200).json({ success: "yaaaa" });
+});
+
+app.listen(port, () => {
+  console.log(`nodemailerProject is listening at http://localhost:${port}`);
+});
