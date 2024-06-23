@@ -22,11 +22,13 @@ let transporter = nodemailer.createTransport({
 
 */
 
-app.use(cors());
+app.use(
+  cors({ origin: "https://eilatbackend.vercel.app", methods: ["POST", "GET"] })
+);
 app.use(express.json());
 app.use(express.static("public"));
 
-app.post("/", (req, res) => {
+app.get("/", (req, res) => {
   const isAddress =
     req.body.address === "" ? "" : `\nכתובת: ${req.body.address}`;
   let mailOptions = {
