@@ -22,9 +22,7 @@ let transporter = nodemailer.createTransport({
 
 */
 
-app.use(
-  cors({ origin: "https://eilatbackend.vercel.app", methods: ["POST", "GET"] })
-);
+app.use(cors({ origin: "http://localhost:8100", methods: ["POST", "GET"] }));
 app.use(express.json());
 app.use(express.static("public"));
 
@@ -36,12 +34,14 @@ app.get("/", (req, res) => {
     to: "yuval.poliak5@gmail.com",
     subject: "בור חדש התגלה",
     text: `שם השולח: ${req.body.name}\n${isAddress}\nבזמן: ${req.body.time}\n פרטי מיקום:\nקו רוחב: ${req.body.position.latitude}\nקו אורך: ${req.body.position.longitude}`,
+    /*
     attachments: [
       {
         filename: req.body.img.filePath,
         path: req.body.img.webviewPath,
       },
     ],
+    */
   };
   //console.log(req.body);
   transporter.sendMail(mailOptions, function (err, data) {
