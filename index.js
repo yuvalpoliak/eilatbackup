@@ -4,6 +4,7 @@ const port = 3000;
 const nodemailer = require("nodemailer");
 const cors = require("cors");
 require("dotenv").config();
+//const fileUpload = require("express-fileupload");
 
 let transporter = nodemailer.createTransport({
   service: "gmail",
@@ -22,9 +23,15 @@ let transporter = nodemailer.createTransport({
 
 */
 
-app.use(cors({ origin: "http://localhost:8100", methods: ["POST", "GET"] }));
+app.use(
+  cors({
+    origin: "https://eilatbackend.onrender.com/",
+    methods: ["POST", "GET"],
+  })
+);
 app.use(express.json());
 app.use(express.static("public"));
+//app.use(fileUpload({ useTempFiles: true, tempFileDir: "/tmp/" }));
 
 app.get("/", (req, res) => {
   const isAddress =
@@ -44,6 +51,7 @@ app.get("/", (req, res) => {
     */
   };
   //console.log(req.body);
+  /*
   transporter.sendMail(mailOptions, function (err, data) {
     if (err) {
       console.log("Error " + err);
@@ -51,6 +59,8 @@ app.get("/", (req, res) => {
       console.log("Email sent successfully");
     }
   });
+  */
+  console.log("mail op ", mailOptions);
   res.status(200).json({ success: "yaaaa" });
 });
 
