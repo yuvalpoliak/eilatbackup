@@ -51,7 +51,7 @@ app.post("/", (req, res) => {
     */
   };
   //console.log(req.body);
-  /*
+
   transporter.sendMail(mailOptions, function (err, data) {
     if (err) {
       console.log("Error " + err);
@@ -59,7 +59,7 @@ app.post("/", (req, res) => {
       console.log("Email sent successfully");
     }
   });
-  */
+
   console.log("mail op ", mailOptions);
   res.status(200).json({ success: "yaaaa" });
 });
