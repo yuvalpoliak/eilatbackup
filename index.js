@@ -41,14 +41,13 @@ app.post("/", (req, res) => {
     to: "yuval.poliak5@gmail.com",
     subject: "בור חדש התגלה",
     text: `שם השולח: ${req.body.name}\n${isAddress}\nבזמן: ${req.body.time}\n פרטי מיקום:\nקו רוחב: ${req.body.position.latitude}\nקו אורך: ${req.body.position.longitude}`,
-    /*
+
     attachments: [
       {
         filename: req.body.img.filePath,
         path: req.body.img.webviewPath,
       },
     ],
-    */
   };
   //console.log(req.body);
 
