@@ -33,7 +33,7 @@ app.use(express.json());
 app.use(express.static("public"));
 //app.use(fileUpload({ useTempFiles: true, tempFileDir: "/tmp/" }));
 
-app.get("/", (req, res) => {
+app.post("/", (req, res) => {
   const isAddress =
     req.body.address === "" ? "" : `\nכתובת: ${req.body.address}`;
   let mailOptions = {
