@@ -6,6 +6,8 @@ const cors = require("cors");
 require("dotenv").config();
 //const fileUpload = require("express-fileupload");
 
+const local = "http://localhost:5173/";
+
 let transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
@@ -16,14 +18,14 @@ let transporter = nodemailer.createTransport({
     refreshToken: process.env.OAUTH_REFRESH_TOKEN,
   },
 });
-/*
+
 app.use(
   cors({
     origin: "*",
     methods: ["POST", "GET"],
   })
 );
-*/
+
 app.use(express.json());
 app.use(express.static("public"));
 //app.use(fileUpload({ useTempFiles: true, tempFileDir: "/tmp/" }));
