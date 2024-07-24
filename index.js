@@ -11,7 +11,6 @@ let transporter = nodemailer.createTransport({
   auth: {
     type: "OAuth2",
     user: process.env.MAIL_USERNAME,
-    pass: process.env.MAIL_PASSWORD,
     clientId: process.env.OAUTH_CLIENTID,
     clientSecret: process.env.OAUTH_CLIENT_SECRET,
     refreshToken: process.env.OAUTH_REFRESH_TOKEN,
@@ -53,14 +52,11 @@ app.post("/", (req, res) => {
 
   transporter.sendMail(mailOptions, function (err, data) {
     if (err) {
-      console.log("Error " + err);
+      res.status(400).json(err);
     } else {
-      console.log("Email sent successfully");
+      res.status(200).json({ success: "yaaaa" });
     }
   });
-
-  console.log("mail op ", mailOptions);
-  res.status(200).json({ success: "yaaaa" });
 });
 
 app.listen(port, () => {
