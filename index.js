@@ -24,7 +24,7 @@ let transporter = nodemailer.createTransport({
 
 app.use(
   cors({
-    origin: "https://eilatbackend.onrender.com/",
+    origin: "*",
     methods: ["POST", "GET"],
   })
 );
