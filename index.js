@@ -17,11 +17,6 @@ let transporter = nodemailer.createTransport({
   },
 });
 
-/*
-
-
-*/
-
 app.use(
   cors({
     origin: "*",
@@ -54,7 +49,7 @@ app.post("/", (req, res) => {
     if (err) {
       res.status(400).json(err);
     } else {
-      res.status(200).json({ success: "yaaaa" });
+      res.status(200).json({ success: "yaaaae" });
     }
   });
 });
