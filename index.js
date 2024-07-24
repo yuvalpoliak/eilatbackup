@@ -16,13 +16,14 @@ let transporter = nodemailer.createTransport({
     refreshToken: process.env.OAUTH_REFRESH_TOKEN,
   },
 });
-
+/*
 app.use(
   cors({
     origin: "*",
     methods: ["POST", "GET"],
   })
 );
+*/
 app.use(express.json());
 app.use(express.static("public"));
 //app.use(fileUpload({ useTempFiles: true, tempFileDir: "/tmp/" }));
