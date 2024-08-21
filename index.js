@@ -46,14 +46,13 @@ app.post("/", (req, res) => {
       },
     ],
   };
-  //console.log(req.body);
 
   transporter.sendMail(mailOptions, function (err, data) {
     if (err) {
       console.log("error ", err);
-      res.status(400).json(err);
+      res.status(400).json({ url: req.originalUrl });
     } else {
-      res.status(200).json({ success: "yaaereraae" });
+      res.status(200).json({ url: "yaaereraae" });
     }
   });
 });
