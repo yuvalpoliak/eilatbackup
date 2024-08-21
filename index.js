@@ -17,7 +17,7 @@ let transporter = nodemailer.createTransport({
     refreshToken: process.env.OAUTH_REFRESH_TOKEN,
   },
 });
-
+/*
 app.all("*", function (req, res, next) {
   var origin = req.get("origin");
   res.header("Access-Control-Allow-Origin", origin);
@@ -28,6 +28,7 @@ app.all("*", function (req, res, next) {
 
 var cors = require("cors");
 app.use(cors());
+*/
 
 app.use(express.json());
 app.use(express.static("public"));
