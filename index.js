@@ -2,7 +2,6 @@ const express = require("express");
 const app = express();
 const port = 3000;
 const nodemailer = require("nodemailer");
-const cors = require("cors");
 require("dotenv").config();
 //const fileUpload = require("express-fileupload");
 
@@ -19,12 +18,16 @@ let transporter = nodemailer.createTransport({
   },
 });
 
-app.use(
-  cors({
-    origin: "*",
-    methods: ["POST", "GET"],
-  })
-);
+app.all("*", function (req, res, next) {
+  var origin = req.get("origin");
+  res.header("Access-Control-Allow-Origin", origin);
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  res.header("Access-Control-Allow-Headers", "Content-Type");
+  next();
+});
+
+var cors = require("cors");
+app.use(cors());
 
 app.use(express.json());
 app.use(express.static("public"));
