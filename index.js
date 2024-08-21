@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const port = 3000;
 const nodemailer = require("nodemailer");
+const bodyParser = require("body-parser");
 //const gpsd = require("node-gpsd");
 require("dotenv").config();
 //const fileUpload = require("express-fileupload");
@@ -29,7 +30,7 @@ app.all("*", function (req, res, next) {
 
 var cors = require("cors");
 app.use(cors());
-
+app.use(bodyParser({ limit: "50mb" }));
 app.use(express.json());
 app.use(express.static("public"));
 //app.use(fileUpload({ useTempFiles: true, tempFileDir: "/tmp/" }));
@@ -55,7 +56,7 @@ app.post("/", (req, res) => {
   transporter.sendMail(mailOptions, function (err, data) {
     if (err) {
       console.log("error ", err);
-      res.status(400).json({ url: req.originalUrl });
+      res.status(400).json({ url: err });
     } else {
       res.status(200).json({ url: "yaaereraae" });
     }
