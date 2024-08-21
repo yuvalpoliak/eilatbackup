@@ -29,7 +29,7 @@ app.all("*", function (req, res, next) {
 var cors = require("cors");
 app.use(cors());
 
-//app.use(express.json());
+app.use(express.json());
 app.use(express.static("public"));
 //app.use(fileUpload({ useTempFiles: true, tempFileDir: "/tmp/" }));
 
