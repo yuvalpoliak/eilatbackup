@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const port = 3000;
 const nodemailer = require("nodemailer");
+//const gpsd = require("node-gpsd");
 require("dotenv").config();
 //const fileUpload = require("express-fileupload");
 
@@ -17,7 +18,7 @@ let transporter = nodemailer.createTransport({
     refreshToken: process.env.OAUTH_REFRESH_TOKEN,
   },
 });
-/*
+
 app.all("*", function (req, res, next) {
   var origin = req.get("origin");
   res.header("Access-Control-Allow-Origin", origin);
@@ -28,13 +29,13 @@ app.all("*", function (req, res, next) {
 
 var cors = require("cors");
 app.use(cors());
-*/
 
 app.use(express.json());
 app.use(express.static("public"));
 //app.use(fileUpload({ useTempFiles: true, tempFileDir: "/tmp/" }));
 
 app.post("/", (req, res) => {
+  console.log(req.body);
   const isAddress =
     req.body.address === "" ? "" : `\nכתובת: ${req.body.address}`;
   let mailOptions = {
