@@ -36,14 +36,14 @@ app.use(express.static("public"));
 //app.use(fileUpload({ useTempFiles: true, tempFileDir: "/tmp/" }));
 
 app.post("/", (req, res) => {
-  console.log(req.body);
+  //console.log(req.body);
   const isAddress =
-    req.body.address === "" ? "" : `\nכתובת: ${req.body.address}`;
+    req.body.address === "" ? "" : `\nמיקום ${req.body.address}`;
   let mailOptions = {
     from: "yuval.poliak5@gmail.com",
-    to: "yuval.poliak5@gmail.com",
+    to: "savethetreeseilat@gmail.com",
     subject: "בור חדש התגלה",
-    text: `שם השולח: ${req.body.name}\n${isAddress}\nבזמן: ${req.body.time}\n פרטי מיקום:\nקו רוחב: ${req.body.position.latitude}\nקו אורך: ${req.body.position.longitude}`,
+    text: `שם השולח: ${req.body.name}\n${isAddress}\nבזמן: ${req.body.time}\n נקודת ציון:\nקו רוחב: ${req.body.position.latitude}\nקו אורך: ${req.body.position.longitude}`,
 
     attachments: [
       {
@@ -55,16 +55,16 @@ app.post("/", (req, res) => {
 
   transporter.sendMail(mailOptions, function (err, data) {
     if (err) {
-      console.log("error ", err);
+      // console.log("error ", err);
       res.status(400).json({ url: err });
     } else {
-      res.status(200).json({ url: "yaaereraae" });
+      res.status(200).json({ url: "sent" });
     }
   });
 });
 
 app.listen(port, () => {
-  console.log(`nodemailerProject is listening at http://localhost:${port}`);
+  // console.log(`nodemailerProject is listening at http://localhost:${port}`);
 });
 
 module.exports = app;
