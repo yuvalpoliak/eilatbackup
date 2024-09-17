@@ -1,6 +1,7 @@
 {
   "short_name": "eilatTrees",
   "name": "eilatTrees",
+  "permissions": ["geolocation"],
   "icons": [
     {
       "src": "./icons/icon-48.webp",
