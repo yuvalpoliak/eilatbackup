@@ -6,7 +6,7 @@ const bodyParser = require("body-parser");
 const gpsd = require("node-gpsd");
 require("dotenv").config();
 //const fileUpload = require("express-fileupload");
-/*
+
 const local = "http://localhost:5173/";
 
 
@@ -70,7 +70,7 @@ app.listen(port, () => {
    console.log(`nodemailerProject is listening at http://localhost:${port}`);
 });
 
-
+/*
 var daemon = new gpsd.Daemon({
     program: 'gpsd',
     device: '/dev/ttyUSB0',
@@ -90,7 +90,7 @@ daemon.start(function() {
     console.log('Started');
 });
 
-*/
+/*
 
 //daemon.logger = new (winston.Logger) ({ exitOnError: false });
 
@@ -104,6 +104,7 @@ var listener = new gpsd.Listener({
     },
     parse: true
 }); 
+*/
 
 listener.connect(function() {
     console.log('Connected');
