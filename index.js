@@ -104,10 +104,11 @@ var listener = new gpsd.Listener({
     },
     parse: true
 }); 
-*/
+
 
 listener.connect(function() {
     console.log('Connected');
 });
+*/
 
 module.exports = app;
