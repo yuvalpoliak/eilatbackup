@@ -3,11 +3,14 @@ const app = express();
 const port = 3000;
 const nodemailer = require("nodemailer");
 const bodyParser = require("body-parser");
-//const gpsd = require("node-gpsd");
+const gpsd = require("node-gpsd");
 require("dotenv").config();
 //const fileUpload = require("express-fileupload");
-
+/*
 const local = "http://localhost:5173/";
+
+
+
 
 let transporter = nodemailer.createTransport({
   service: "gmail",
@@ -64,7 +67,46 @@ app.post("/", (req, res) => {
 });
 
 app.listen(port, () => {
-  // console.log(`nodemailerProject is listening at http://localhost:${port}`);
+   console.log(`nodemailerProject is listening at http://localhost:${port}`);
+});
+
+
+var daemon = new gpsd.Daemon({
+    program: 'gpsd',
+    device: '/dev/ttyUSB0',
+    port: 2947,
+    pid: '/tmp/gpsd.pid',
+    readOnly: false,
+    logger: {
+        info: function() {},
+        warn: console.warn,
+        error: console.error
+    }
+});
+
+
+
+daemon.start(function() {
+    console.log('Started');
+});
+
+*/
+
+//daemon.logger = new (winston.Logger) ({ exitOnError: false });
+
+var listener = new gpsd.Listener({
+    port: 2947,
+    hostname: 'localhost',
+    logger:  {
+        info: function() {},
+        warn: console.warn,
+        error: console.error
+    },
+    parse: true
+}); 
+
+listener.connect(function() {
+    console.log('Connected');
 });
 
 module.exports = app;
