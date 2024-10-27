@@ -9,9 +9,6 @@ require("dotenv").config();
 
 const local = "http://localhost:5173/";
 
-
-
-
 let transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
@@ -44,7 +41,7 @@ app.post("/", (req, res) => {
     req.body.address === "" ? "" : `\nמיקום ${req.body.address}`;
   let mailOptions = {
     from: "yuval.poliak5@gmail.com",
-    to: "savethetreeseilat@gmail.com",
+    to: "samplesellme@gmail.com",
     subject: "בור חדש התגלה",
     text: `שם השולח: ${req.body.name}\n${isAddress}\nבזמן: ${req.body.time}\n נקודת ציון:\nקו רוחב: ${req.body.position.latitude}\nקו אורך: ${req.body.position.longitude}`,
 
@@ -67,7 +64,7 @@ app.post("/", (req, res) => {
 });
 
 app.listen(port, () => {
-   console.log(`nodemailerProject is listening at http://localhost:${port}`);
+  console.log(`nodemailerProject is listening at http://localhost:${port}`);
 });
 
 /*
