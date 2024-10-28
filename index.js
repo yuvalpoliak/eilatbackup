@@ -61,7 +61,7 @@ app.post("/", (req, res) => {
       res.status(400).json({ url: err });
     } else {
       console.log("sent");
-      res.status(200).json({ url: "sent" });
+      res.status(200).json({ url: "sent", data });
     }
   });
 });
