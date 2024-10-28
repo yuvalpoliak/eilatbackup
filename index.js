@@ -34,7 +34,7 @@ app.use(express.json());
 app.use(express.static("public"));
 //app.use(fileUpload({ useTempFiles: true, tempFileDir: "/tmp/" }));
 
-app.post("/", (req, res) => {
+app.post("/", async (req, res) => {
   const isAddress =
     req.body.address == "" ||
     req.body.address == undefined ||
@@ -54,15 +54,16 @@ app.post("/", (req, res) => {
       },
     ],
   };
-
-  transporter.sendMail(mailOptions, function (err, data) {
-    if (err) {
-      console.log("error ", err);
-      res.status(400).json({ url: err });
-    } else {
-      console.log("sent");
-      res.status(200).json({ url: "sent", data });
-    }
+  await new Promise((resolve, rej) => {
+    transporter.sendMail(mailOptions, function (err, data) {
+      if (err) {
+        console.log("error ", err);
+        rej(res.status(400).json({ url: err }));
+      } else {
+        console.log("sent");
+        resolve(res.status(200).json({ url: "sent", data }));
+      }
+    });
   });
 });
 
