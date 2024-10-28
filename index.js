@@ -3,7 +3,6 @@ const app = express();
 const port = 3000;
 const nodemailer = require("nodemailer");
 const bodyParser = require("body-parser");
-const gpsd = require("node-gpsd");
 require("dotenv").config();
 //const fileUpload = require("express-fileupload");
 
@@ -36,9 +35,12 @@ app.use(express.static("public"));
 //app.use(fileUpload({ useTempFiles: true, tempFileDir: "/tmp/" }));
 
 app.post("/", (req, res) => {
-  //console.log(req.body);
   const isAddress =
-    req.body.address === "" ? "" : `\nמיקום ${req.body.address}`;
+    req.body.address == "" ||
+    req.body.address == undefined ||
+    req.body.address == null
+      ? "מיקום לא סופק"
+      : `\nמיקום ${req.body.address}`;
   let mailOptions = {
     from: "yuval.poliak5@gmail.com",
     to: "samplesellme@gmail.com",
@@ -55,9 +57,10 @@ app.post("/", (req, res) => {
 
   transporter.sendMail(mailOptions, function (err, data) {
     if (err) {
-      // console.log("error ", err);
+      console.log("error ", err);
       res.status(400).json({ url: err });
     } else {
+      console.log("sent");
       res.status(200).json({ url: "sent" });
     }
   });
