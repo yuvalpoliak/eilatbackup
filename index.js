@@ -42,7 +42,7 @@ app.post("/", async (req, res) => {
       : `\nמיקום ${req.body.address}`;
   let mailOptions = {
     from: "yuval.poliak5@gmail.com",
-    to: "samplesellme@gmail.com",
+    to: "savethetreeseilat@gmail.com",
     subject: "בור חדש התגלה",
     text: `שם השולח: ${req.body.name}\n${isAddress}\nבזמן: ${req.body.time}\n נקודת ציון:\nקו רוחב: ${req.body.position.latitude}\nקו אורך: ${req.body.position.longitude}`,
 
