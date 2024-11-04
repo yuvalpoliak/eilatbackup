@@ -31,7 +31,6 @@ var cors = require("cors");
 app.use(cors());
 app.use(bodyParser({ limit: "50mb" }));
 app.use(express.json());
-app.use(express.static("public"));
 //app.use(fileUpload({ useTempFiles: true, tempFileDir: "/tmp/" }));
 
 app.post("/", async (req, res) => {
