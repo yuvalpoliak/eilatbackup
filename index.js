@@ -53,7 +53,11 @@ app.post("/", async (req, res) => {
         path: req.body.img.webviewPath,
       },
       {
-        filename: "location",
+        filename: `https://maps.googleapis.com/maps/api/staticmap?center=${req.body.position.latitude},${req.body.position.longitude}&markers=${req.body.position.latitude},${req.body.position.longitude}&zoom=18&size=400x400&key=AIzaSyCGi5v_6qYfBI3wR9qI37flAEYnHTC7maU`,
+        path: `https://maps.googleapis.com/maps/api/staticmap?center=${req.body.position.latitude},${req.body.position.longitude}&markers=${req.body.position.latitude},${req.body.position.longitude}&zoom=18&size=400x400&key=AIzaSyCGi5v_6qYfBI3wR9qI37flAEYnHTC7maU`,
+      },
+      {
+        filename: "staticmap.png",
         path: `https://maps.googleapis.com/maps/api/staticmap?center=${req.body.position.latitude},${req.body.position.longitude}&markers=${req.body.position.latitude},${req.body.position.longitude}&zoom=18&size=400x400&key=AIzaSyCGi5v_6qYfBI3wR9qI37flAEYnHTC7maU`,
       },
     ],
