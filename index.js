@@ -42,8 +42,8 @@ app.post("/", async (req, res) => {
       : `\nמיקום ${req.body.address}`;
 
   let mailOptions = {
-    from: "yuval.poliak5@gmail.com",
-    to: "samplesellme@gmail.com",
+    from: "savethetreeseilat@gmail.com",
+    to: "savethetreeseilat@gmail.com",
     subject: "בור חדש התגלה",
     html: `<p>שם השולח: ${req.body.name}\n${isAddress}\nבזמן: ${req.body.time}\n נקודת ציון:\nקו רוחב: ${req.body.position.latitude}\nקו אורך: ${req.body.position.longitude}</p>`,
 
@@ -51,10 +51,6 @@ app.post("/", async (req, res) => {
       {
         filename: req.body.img.filePath,
         path: req.body.img.webviewPath,
-      },
-      {
-        filename: `https://maps.googleapis.com/maps/api/staticmap?center=${req.body.position.latitude},${req.body.position.longitude}&markers=${req.body.position.latitude},${req.body.position.longitude}&zoom=18&size=400x400&key=AIzaSyCGi5v_6qYfBI3wR9qI37flAEYnHTC7maU`,
-        path: `https://maps.googleapis.com/maps/api/staticmap?center=${req.body.position.latitude},${req.body.position.longitude}&markers=${req.body.position.latitude},${req.body.position.longitude}&zoom=18&size=400x400&key=AIzaSyCGi5v_6qYfBI3wR9qI37flAEYnHTC7maU`,
       },
       {
         filename: "staticmap.png",
