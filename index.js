@@ -44,8 +44,14 @@ app.post("/", async (req, res) => {
     from: "yuval.poliak5@gmail.com",
     to: "samplesellme@gmail.com",
     subject: "בור חדש התגלה",
-    html: "<p>html part yee pee</p>",
-    text: `שם השולח: ${req.body.name}\n${isAddress}\nבזמן: ${req.body.time}\n נקודת ציון:\nקו רוחב: ${req.body.position.latitude}\nקו אורך: ${req.body.position.longitude}`,
+    html: `<p>שם השולח: ${req.body.name}\n${isAddress}\nבזמן: ${req.body.time}\n נקודת ציון:\nקו רוחב: ${req.body.position.latitude}\nקו אורך: ${req.body.position.longitude}</p><br /><p>html part yee pee</p><br/>    <iframe
+      width="600"
+      height="450"
+      loading="lazy"
+      allowFullScreen
+      referrerPolicy="no-referrer-when-downgrade"
+      src=https://www.google.com/maps/embed/v1/place?key=AIzaSyCGi5v_6qYfBI3wR9qI37flAEYnHTC7maU&q=${req.body.position.latitude}+${req.body.position.longitude}
+    ></iframe>`,
 
     attachments: [
       {
