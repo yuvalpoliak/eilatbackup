@@ -45,19 +45,16 @@ app.post("/", async (req, res) => {
     from: "yuval.poliak5@gmail.com",
     to: "samplesellme@gmail.com",
     subject: "בור חדש התגלה",
-    html: `<p>שם השולח: ${req.body.name}\n${isAddress}\nבזמן: ${req.body.time}\n נקודת ציון:\nקו רוחב: ${req.body.position.latitude}\nקו אורך: ${req.body.position.longitude}</p><br /><p>html part yee pee</p><br/><iframe
-      width="600"
-      height="450"
-      loading="lazy"
-      allowFullScreen
-      referrerPolicy="no-referrer-when-downgrade"
-      src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCGi5v_6qYfBI3wR9qI37flAEYnHTC7maU&q=${req.body.position.latitude}+${req.body.position.longitude}"
-    ></iframe>`,
+    html: `<p>שם השולח: ${req.body.name}\n${isAddress}\nבזמן: ${req.body.time}\n נקודת ציון:\nקו רוחב: ${req.body.position.latitude}\nקו אורך: ${req.body.position.longitude}</p>`,
 
     attachments: [
       {
         filename: req.body.img.filePath,
         path: req.body.img.webviewPath,
+      },
+      {
+        filename: "location",
+        path: `https://maps.googleapis.com/maps/api/staticmap?center=${req.body.position.latitude},${req.body.position.longitude}&markers=${req.body.position.latitude},${req.body.position.longitude}&zoom=18&size=400x400&key=AIzaSyCGi5v_6qYfBI3wR9qI37flAEYnHTC7maU`,
       },
     ],
   };
